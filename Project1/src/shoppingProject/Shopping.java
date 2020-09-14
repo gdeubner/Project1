@@ -42,7 +42,7 @@ public class Shopping {
                 } else if (command[0] == "R") { // remove
                     remove(myBag, item);
                 }else {
-                    System.out.prinln("Error: Unrecognized command.");
+                    System.out.println("Error: Unrecognized command.");
                 }
             }
         }
