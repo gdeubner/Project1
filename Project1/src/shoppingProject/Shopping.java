@@ -1,5 +1,6 @@
 package shoppingProject;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /**
@@ -7,6 +8,7 @@ import java.util.Scanner;
  *
  */
 public class Shopping {
+    DecimalFormat df = new DecimalFormat(".##");
     
     /**
      * A method which reads inputs from standard I/O.
@@ -28,21 +30,23 @@ public class Shopping {
                 } else if (firstChar == 'C') { // checking out
                     checkOut(myBag);
                 } else { // Error
-                    System.out.println("Error: Unrecognized command.");
+                    System.out.println("Invalid command!");
                 }
             } else {
                 String[] command = line.split("\s", 4);
-                if(command.length>4) {
-                    System.out.println("Error: too many input tokens.");
-                    break;
-                }
-                GroceryItem item = new GroceryItem(command[1], command[2], command[3]);
-                if (command[0] == "A") { // add
-                    add(myBag, item);
-                } else if (command[0] == "R") { // remove
-                    remove(myBag, item);
-                }else {
-                    System.out.println("Error: Unrecognized command.");
+                if(command.length != 4) {
+                    System.out.println("Invalid command!");
+                    
+                } else {
+                    GroceryItem item = new GroceryItem(command[1], Double.parseDouble(command[2]),
+                            Boolean.parseBoolean(command[3]));
+                    if (command[0].equals("A")) { // add
+                        add(myBag, item);
+                    } else if (command[0].equals("R")) { // remove
+                        remove(myBag, item);
+                    }else {
+                        System.out.println("Invalid command!");
+                    }
                 }
             }
         }
@@ -55,14 +59,16 @@ public class Shopping {
      */
     private void checkOut(ShoppingBag bag) {
         if(bag.getSize()==0) {
-            System.out.println("Unable to check out, the bag is empty!");
+            System.out.println("Invalid command!");
         }
         else {
-            System.out.println("Checking out " + bag.getSize() + " item(s):");
+            System.out.println("**Checking out " + bag.getSize() + " item(s):");
             bag.print();
-            System.out.println("Sales total: $" + bag.salesPrice());
-            System.out.println("Sales tax: $" + bag.salesTax());
-            System.out.println("Total amount paid: $" + bag.salesPrice() + bag.salesTax());
+            System.out.println("*Sales total: $" + df.format(bag.salesPrice()));
+            System.out.println("*Sales tax: $" + df.format(bag.salesTax()));
+            System.out.println("*Total amount paid: $" + df.format(bag.salesPrice() 
+                    + bag.salesTax()));
+            bag.emptyBag();
         }
     }
     
@@ -95,7 +101,7 @@ public class Shopping {
      */
     private void remove(ShoppingBag bag, GroceryItem item) {
         if(bag.remove(item)) {
-            System.out.println(item.getName() + " " + item.getPrice() + " removed.");
+            System.out.println(item.getName() + " " + df.format(item.getPrice()) + " removed.");
         }else {
             System.out.println("Unable to remove, this item is not in the bag.");
         }
@@ -109,7 +115,7 @@ public class Shopping {
         if(bag.getSize()==0) {
             System.out.println("The bag is empty!");
         }else {
-            System.out.println("**You have " + bag.getSize() + "item(s) in the bag:");
+            System.out.println("**You have " + bag.getSize() + " item(s) in the bag:");
             bag.print();
             System.out.println("**End of list");
         }

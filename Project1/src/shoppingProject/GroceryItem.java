@@ -59,9 +59,12 @@ public class GroceryItem {
 	 * @return true if name, price, and taxable are the same for both objects 
 	 */
 	public boolean equals(Object obj) {
-		Object obj = new GroceryItem(name, price, taxable);
-		if (obj.getname().equals(GroceryItem.getName())) {
-			
+		GroceryItem item = (GroceryItem)obj;
+		if(item.getName().equals(this.name) && item.getPrice() == this.getPrice()
+		    && (item.getTaxable() == this.taxable)) {
+		    return true;
+		}else {
+		    return false;
 		}
 		
 	}
@@ -89,4 +92,6 @@ public class GroceryItem {
 	public String toString() {
 		return name + ": $" + df.format(price) + " : " + isTaxable(taxable);
 	}
+	
+	
 }
