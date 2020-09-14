@@ -36,10 +36,11 @@ public class Shopping {
                     System.out.println("Error: too many input tokens.");
                     break;
                 }
-                GroceryItem item = new GroceryItem(command[1], command[2], command[3]);
-                if (command[0] == "A") { // add
+                GroceryItem item = new GroceryItem(command[1], Double.parseDouble(command[2]),
+                        Boolean.parseBoolean(command[3]));
+                if (command[0].equals("A")) { // add
                     add(myBag, item);
-                } else if (command[0] == "R") { // remove
+                } else if (command[0].equals("R")) { // remove
                     remove(myBag, item);
                 }else {
                     System.out.println("Error: Unrecognized command.");
@@ -109,7 +110,7 @@ public class Shopping {
         if(bag.getSize()==0) {
             System.out.println("The bag is empty!");
         }else {
-            System.out.println("**You have " + bag.getSize() + "item(s) in the bag:");
+            System.out.println("**You have " + bag.getSize() + " item(s) in the bag:");
             bag.print();
             System.out.println("**End of list");
         }

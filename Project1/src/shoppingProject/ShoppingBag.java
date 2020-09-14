@@ -87,15 +87,20 @@ public class ShoppingBag {
         int positionInBag = find(item);
         if(positionInBag == -1) {
             return false;
-        }else {
-            bag[positionInBag] = bag[size-1];
-            bag[size-1] = null;
+        } else {
+            if (positionInBag == size - 1)
+                bag[positionInBag] = null;
+            else {
+                bag[positionInBag] = bag[size - 1];
+                bag[size - 1] = null;
+            }
             return true;
         }
     }
 
     /**
      * Sums price of each item in bag.
+     * 
      * @return int - representing the total sales price for bag.
      */
     public double salesPrice() {
@@ -114,7 +119,7 @@ public class ShoppingBag {
         double salesTax = 0.06625;
         double taxableSum = 0;
         for(GroceryItem i : bag) {
-            if(i.getTaxable) {
+            if(i.getTaxable()) {
                 taxableSum += i.getPrice();
             }
         }
