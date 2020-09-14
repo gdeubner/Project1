@@ -61,7 +61,7 @@ public class GroceryItem {
 	public boolean equals(Object obj) {
 		GroceryItem item = (GroceryItem)obj;
 		if(item.getName().equals(this.name) && item.getPrice() == this.getPrice()
-		    && (item.getTaxable() && this.taxable)) {
+		    && (item.getTaxable() == this.taxable)) {
 		    return true;
 		}else {
 		    return false;
@@ -92,4 +92,6 @@ public class GroceryItem {
 	public String toString() {
 		return name + ": $" + df.format(price) + " : " + isTaxable(taxable);
 	}
+	
+	
 }

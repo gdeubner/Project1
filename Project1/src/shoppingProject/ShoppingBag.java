@@ -1,5 +1,7 @@
 package shoppingProject;
 
+import java.text.DecimalFormat;
+
 /**
  * This class is meant to emulate a shopping bag. It consists of an array of
  * type GroceryItem which starts at size 5 and increases by 5 when capacity is
@@ -94,6 +96,8 @@ public class ShoppingBag {
                 bag[positionInBag] = bag[size - 1];
                 bag[size - 1] = null;
             }
+            size --;
+            
             return true;
         }
     }
@@ -104,9 +108,9 @@ public class ShoppingBag {
      * @return int - representing the total sales price for bag.
      */
     public double salesPrice() {
-        int sum = 0;
-        for(GroceryItem i : bag) {
-            sum += i.getPrice();
+        double sum = 0;
+        for(int i = 0; i < size; i++) {
+            sum += bag[i].getPrice();
         }
         return sum;
     }
@@ -118,9 +122,9 @@ public class ShoppingBag {
     public double salesTax() {
         double salesTax = 0.06625;
         double taxableSum = 0;
-        for(GroceryItem i : bag) {
-            if(i.getTaxable()) {
-                taxableSum += i.getPrice();
+        for(int i = 0; i < size; i ++) {
+            if(bag[i].getTaxable()) {
+                taxableSum += bag[i].getPrice();
             }
         }
         double taxSum = taxableSum * salesTax; 
@@ -131,11 +135,16 @@ public class ShoppingBag {
      * Method which prints the contents of bag
      */
     public void print() {
-        for(GroceryItem i : bag) {
-            i.toString();
+        for(int i = 0; i < size; i ++) {
+            System.out.println("·" + bag[i].toString());
         }
     }
     
+    public void emptyBag() {
+        bag = new GroceryItem[5];
+        capacity = 5;
+        size = 0;
+    }
     
     
     // Need a 'bed main' or something here to test the functions 
