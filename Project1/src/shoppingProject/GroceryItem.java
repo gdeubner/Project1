@@ -56,14 +56,19 @@ public class GroceryItem {
 	/**
 	 * Method that returns true only if all three data fields of obj are the same as the 
 	 * item calling the method.
+	 * Casts Object type into GroceryItem type to make comparison possible.
 	 * @return true if name, price, and taxable are the same for both objects 
 	 */
 	public boolean equals(Object obj) {
-		Object obj = new GroceryItem(name, price, taxable);
-		if (obj.getname().equals(GroceryItem.getName())) {
-			
-		}
-		
+		GroceryItem item = (GroceryItem) obj;
+		 
+		if (item.getName().equals(this.name) && item.getPrice() == (this.price) 
+	            && (item.getTaxable() && this.taxable)) {
+			return true;		
+		 }
+		 else {
+		 	return false;			 
+		 }		
 	}
 	
 	/**
