@@ -4,6 +4,11 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /**
+ * This class creates a ShoppingBag instance for the user and accepts commands
+ * which manipulate it.
+ * If the commands are incorrect, an error message is displayed.
+ * If the commands are recognized, then either the bag's add(). remove(), quit(),
+ * display() or checkout() method is called.
  * @author Graham Deubner, Sandeep Alankar
  *
  */
