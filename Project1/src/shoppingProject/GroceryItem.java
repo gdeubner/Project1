@@ -17,7 +17,7 @@ public class GroceryItem {
     private double price;
     private boolean taxable;
 
-    DecimalFormat df = new DecimalFormat(".##"); //formats decimal output as rounded to 2 decimal places
+    DecimalFormat df = new DecimalFormat(".##"); //formats decimal output rounded to 2 decimal places
 
     /**
      * This is a getter method that returns the item name.
