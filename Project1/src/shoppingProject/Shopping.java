@@ -5,10 +5,10 @@ import java.util.Scanner;
 
 /**
  * This class creates a ShoppingBag instance for the user and accepts commands
- * which manipulate it.
- * If the commands are incorrect, an error message is displayed.
- * If the commands are recognized, then either the bag's add(). remove(), quit(),
- * display() or checkout() method is called.
+ * which manipulate it. If the commands are incorrect, an error message is
+ * displayed. If the commands are recognized, then either the bag's add().
+ * remove(), quit(), display() or checkout() method is called.
+ * 
  * @author Graham Deubner, Sandeep Alankar
  *
  */
@@ -21,31 +21,26 @@ public class Shopping {
     public void run() {
         Scanner myScanner = new Scanner(System.in);
         ShoppingBag myBag = new ShoppingBag();
-        System.out.println("Let's start shopping!");
         while (true) {
-            String line = myScanner.nextLine();
-            char firstChar = line.charAt(0);
-            if (line.length() == 1) {
-                if (firstChar == 'Q') { // quit
-                    quit(myBag);
-                    break;
-                } else if (firstChar == 'P') { // display
-                    display(myBag);
-                } else if (firstChar == 'C') { // checking out
-                    checkOut(myBag);
-                } else { // Error
-                    System.out.println("Invalid command!");
-                }
-            } else {
-                String[] command = line.split("\s", 4);
-                if (command.length != 4) {
+            String[] input = myScanner.nextLine().split("\s");
+            if (input[0].equals("Q") && input.length == 1) { // quit
+                quit(myBag);
+                break;
+            } else if (input[0].equals("P") && input.length == 1) { // display
+                display(myBag);
+            } else if (input[0].equals("C") && input.length == 1) { // checking out
+                checkOut(myBag);
+            } else { // A and R commands
+                int requiredInputNum = 4; // number of parameters to create a GroceryItem
+                if ((!input[0].equals("A") && !input[0].equals("R")) || input.length > requiredInputNum) {
                     System.out.println("Invalid command!");
                 } else {
-                    GroceryItem item = new GroceryItem(command[1], Double.parseDouble(command[2]),
-                            Boolean.parseBoolean(command[3]));
-                    if (command[0].equals("A")) { // add
+                    String[] commands = getInputs(input, requiredInputNum, myScanner); // holds input parameters
+                    GroceryItem item = new GroceryItem(commands[1], Double.parseDouble(commands[2]),
+                            Boolean.parseBoolean(commands[3]));
+                    if (commands[0].equals("A")) {
                         add(myBag, item);
-                    } else if (command[0].equals("R")) { // remove
+                    } else if (commands[0].equals("R")) {
                         remove(myBag, item);
                     } else {
                         System.out.println("Invalid command!");
@@ -57,6 +52,29 @@ public class Shopping {
     }
 
     /**
+     * Helper method for run(). Prompts user for input to fill the "A" and "R"
+     * commands
+     * 
+     * @param input       - user provided input from the command line
+     * @param numGIParams - the number of parameters required for a GroceryItem
+     * @param myScanner   - the Scanner object used to get user input
+     * @return a String array containing the 3 required parameters forGroceryItem
+     */
+    private static String[] getInputs(String[] input, int requiredInputNum, Scanner myScanner) {
+        int inputTokenCounter = 0; // counter for parameters entered by user
+        String[] commands = new String[requiredInputNum];
+        while (inputTokenCounter < requiredInputNum) {
+            for (String s : input) {
+                commands[inputTokenCounter] = s;
+                inputTokenCounter++;
+            }
+            if (inputTokenCounter < requiredInputNum)
+                input = myScanner.nextLine().split("\s");
+        }
+        return commands;
+    }
+
+    /**
      * A method which displays the contents, sales total, sales tax, and total of a
      * given bag.
      * 
@@ -64,7 +82,7 @@ public class Shopping {
      */
     private void checkOut(ShoppingBag bag) {
         if (bag.getSize() == 0) {
-            System.out.println("Invalid command!");
+            System.out.println("Unable to checkout, the bag is empty!");
         } else {
             System.out.println("**Checking out " + bag.getSize() + " item(s):");
             bag.print();
@@ -126,5 +144,4 @@ public class Shopping {
             System.out.println("**End of list");
         }
     }
-
 }
