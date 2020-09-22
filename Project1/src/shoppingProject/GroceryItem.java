@@ -32,7 +32,6 @@ public class GroceryItem {
      * @return price of item
      */
     public double getPrice() {
-
         return price;
     }
 
@@ -104,5 +103,4 @@ public class GroceryItem {
         DecimalFormat df = new DecimalFormat(".##");
         return name + ": $" + df.format(price) + " : " + isTaxable(taxable);
     }
-
 }
