@@ -34,7 +34,6 @@ public class GroceryItem {
      * @return price of item
      */
     public double getPrice() {
-
         return price;
     }
 
@@ -105,5 +104,4 @@ public class GroceryItem {
     public String toString() {
         return name + ": $" + df.format(price) + " : " + isTaxable(taxable);
     }
-
 }
