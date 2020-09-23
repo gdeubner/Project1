@@ -1,6 +1,5 @@
 package shoppingProject;
 
-import java.text.DecimalFormat;
 import java.util.Scanner;
 
 /**
@@ -13,8 +12,7 @@ import java.util.Scanner;
  *
  */
 public class Shopping {
-    DecimalFormat df = new DecimalFormat(".##");
-
+    
     /**
      * A method which reads inputs from standard I/O.
      */
@@ -86,9 +84,12 @@ public class Shopping {
         } else {
             System.out.println("**Checking out " + bag.getSize() + " item(s):");
             bag.print();
-            System.out.println("*Sales total: $" + df.format(bag.salesPrice()));
-            System.out.println("*Sales tax: $" + df.format(bag.salesTax()));
-            System.out.println("*Total amount paid: $" + df.format(bag.salesPrice() + bag.salesTax()));
+            String decimalSalesPrice = String.format("%.2f", bag.salesPrice());
+            System.out.println("*Sales total: $" + decimalSalesPrice);
+            String decimalSalesTax = String.format("%.2f", bag.salesTax());
+            System.out.println("*Sales tax: $" + decimalSalesTax);
+            String decimalTotal = String.format("%.2f", bag.salesPrice() + bag.salesTax());
+            System.out.println("*Total amount paid: $" + decimalTotal);
             bag.emptyBag();
         }
     }
@@ -124,7 +125,8 @@ public class Shopping {
      */
     private void remove(ShoppingBag bag, GroceryItem item) {
         if (bag.remove(item)) {
-            System.out.println(item.getName() + " " + df.format(item.getPrice()) + " removed.");
+            String decimalPrice = String.format("%.2f", item.getPrice());
+            System.out.println(item.getName() + " " + decimalPrice + " removed.");
         } else {
             System.out.println("Unable to remove, this item is not in the bag.");
         }
