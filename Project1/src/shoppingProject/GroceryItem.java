@@ -1,7 +1,5 @@
 package shoppingProject;
 
-import java.text.DecimalFormat;
-
 /**
  * This class defines the GroceryItem abstract data type with 3 data fields and
  * contains methods to return a string containing the item name, its price, and
@@ -73,7 +71,7 @@ public class GroceryItem {
             } else {
                 return false;
             }
-        }
+        } 
         return false;
     }
 
@@ -100,7 +98,7 @@ public class GroceryItem {
      * isTaxable(taxable) method.
      */
     public String toString() {
-        DecimalFormat df = new DecimalFormat(".##");
-        return name + ": $" + df.format(price) + " : " + isTaxable(taxable);
+        String decimalPrice = String.format("%.2f", price);
+        return name + ": $" + decimalPrice + " : " + isTaxable(taxable);
     }
 }
