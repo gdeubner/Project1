@@ -12,7 +12,7 @@ import java.util.Scanner;
  *
  */
 public class Shopping {
-    
+
     /**
      * A method which reads inputs from standard I/O.
      */
@@ -20,7 +20,7 @@ public class Shopping {
         Scanner myScanner = new Scanner(System.in);
         ShoppingBag myBag = new ShoppingBag();
         while (true) {
-            String[] input = myScanner.nextLine().split("\s");
+            String[] input = myScanner.nextLine().split("\\s");
             if (input[0].equals("Q") && input.length == 1) { // quit
                 quit(myBag);
                 break;
@@ -53,9 +53,9 @@ public class Shopping {
      * Helper method for run(). Prompts user for input to fill the "A" and "R"
      * commands
      * 
-     * @param input       - user provided input from the command line
-     * @param numGIParams - the number of parameters required for a GroceryItem
-     * @param myScanner   - the Scanner object used to get user input
+     * @param input            - user provided input from the command line
+     * @param requiredInputNum - the number of parameters required for a GroceryItem
+     * @param myScanner        - the Scanner object used to get user input
      * @return a String array containing the 3 required parameters forGroceryItem
      */
     private static String[] getInputs(String[] input, int requiredInputNum, Scanner myScanner) {
@@ -67,7 +67,7 @@ public class Shopping {
                 inputTokenCounter++;
             }
             if (inputTokenCounter < requiredInputNum)
-                input = myScanner.nextLine().split("\s");
+                input = myScanner.nextLine().split("\\s");
         }
         return commands;
     }

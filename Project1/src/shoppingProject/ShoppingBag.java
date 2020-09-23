@@ -137,7 +137,7 @@ public class ShoppingBag {
      */
     public void print() {
         for (int i = 0; i < size; i++) {
-            System.out.println("Â·" + bag[i].toString());
+            System.out.println("·" + bag[i].toString());
         }
     }
 
@@ -151,24 +151,25 @@ public class ShoppingBag {
     }
 
     /**
-     * Helper method for the testRemove() helper method.
-     * This method removes a given GroceryItem from bag, prints
-     * it's success or failure, and returns the newly altered bag
-     * object. 
-     * @param bag - ShoppingBag item pre-populated with GroceryItems.
+     * Helper method for the testRemove() helper method. This method removes a given
+     * GroceryItem from bag, prints it's success or failure, and returns the newly
+     * altered bag object.
+     * 
+     * @param bag  - ShoppingBag item pre-populated with GroceryItems.
      * @param item - the GroceryItem to be added to bag.
      */
     private static ShoppingBag removeItemTest(ShoppingBag bag, GroceryItem item) {
-        if(bag.remove(item))
+        if (bag.remove(item))
             System.out.println(item.getName() + " removed.");
         else
             System.out.println("Unable to remove " + item.getName());
         return bag;
     }
-    
+
     /**
-     * Helper method for testing the add() method.
-     * Method adds several GroceryItems to bag and prints bag's contents.
+     * Helper method for testing the add() method. Method adds several GroceryItems
+     * to bag and prints bag's contents.
+     * 
      * @param itemList - array filled with GroceryItems.
      * @return ShoppingBag item - the altered shopping bag to be used in next test.
      */
@@ -183,18 +184,19 @@ public class ShoppingBag {
         bag.print();
         return bag;
     }
-    
+
     /**
-     * Helper method for testing the remove() method.
-     * Method removes several GroceryItems from bag, prints the contents,
-     * then attempts to remove GroceryItems not in bag, and then prints the contents.  
-     * @param bag - ShoppingBag item pre-populated with GroceryItems.
+     * Helper method for testing the remove() method. Method removes several
+     * GroceryItems from bag, prints the contents, then attempts to remove
+     * GroceryItems not in bag, and then prints the contents.
+     * 
+     * @param bag      - ShoppingBag item pre-populated with GroceryItems.
      * @param itemList - array filled with GroceryItems.
      * @return ShoppingBag item - the altered shopping bag to be used in next test.
      */
     private static ShoppingBag testRemove(ShoppingBag bag, GroceryItem[] itemList) {
         System.out.println("\nTest Case 2.1: remove() with success");
-        bag = removeItemTest(bag, itemList[0]);    
+        bag = removeItemTest(bag, itemList[0]);
         bag = removeItemTest(bag, itemList[2]);
         System.out.println("\nPrinting contents:");
         bag.print();
@@ -203,14 +205,15 @@ public class ShoppingBag {
         bag = removeItemTest(bag, itemList[5]);
         System.out.println("\nPrinting contents:");
         bag.print();
-        return bag;        
+        return bag;
     }
-    
+
     /**
-     * Helper method which tests the grow() method.
-     * Method prints the original capacity of bag, adds several GroceryItems to bag,
-     * and then prints the new, enlarged capacity of bag.
-     * @param bag - ShoppingBag item pre-populated with GroceryItems.
+     * Helper method which tests the grow() method. Method prints the original
+     * capacity of bag, adds several GroceryItems to bag, and then prints the new,
+     * enlarged capacity of bag.
+     * 
+     * @param bag      - ShoppingBag item pre-populated with GroceryItems.
      * @param itemList - array filled with GroceryItems.
      * @return ShoppingBag item - the altered shopping bag to be used in next test.
      */
@@ -225,10 +228,11 @@ public class ShoppingBag {
         System.out.println("\nTest Case 4: salesTax()");
         return bag;
     }
-    
+
     /**
-     * Helper method for testing the salesTax() method.
-     * Method calls the salesTax() method and prints the result.
+     * Helper method for testing the salesTax() method. Method calls the salesTax()
+     * method and prints the result.
+     * 
      * @param bag - ShoppingBag item pre-populated with GroceryItems.
      */
     private static void testSalesTax(ShoppingBag bag) {
@@ -236,23 +240,20 @@ public class ShoppingBag {
     }
 
     /**
-     * Testbed main method used for running the test 4 different test helper methods.
-     * Method creates an array of GroceryItems to be used in several tests, then calls
-     * 4 testing helper methods.
+     * Testbed main method used for running the test 4 different test helper
+     * methods. Method creates an array of GroceryItems to be used in several tests,
+     * then calls 4 testing helper methods.
+     * 
      * @param args - convention only, not used.
      */
     public static void main(String[] args) {
-        GroceryItem[] itemList = {
-                new GroceryItem("Spider_Eye", 0.01, false),
-                new GroceryItem("Golden_Apple", 49.99, true),
-                new GroceryItem("Rotten_Flesh", 0.03, false),
-                new GroceryItem("Enchanted_Golden_Apple", 100.01, true),
-                new GroceryItem("Golden_Carrot", 49.99, true),
-                new GroceryItem("Poinsonous_Potato", 1.00, false)
-        };
+        GroceryItem[] itemList = { new GroceryItem("Spider_Eye", 0.01, false),
+                new GroceryItem("Golden_Apple", 49.99, true), new GroceryItem("Rotten_Flesh", 0.03, false),
+                new GroceryItem("Enchanted_Golden_Apple", 100.01, true), new GroceryItem("Golden_Carrot", 49.99, true),
+                new GroceryItem("Poinsonous_Potato", 1.00, false) };
         ShoppingBag bag = testAdd(itemList);
         bag = testRemove(bag, itemList);
-        bag = testGrow(bag,itemList);
-        testSalesTax(bag);        
+        bag = testGrow(bag, itemList);
+        testSalesTax(bag);
     }
 }
