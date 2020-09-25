@@ -11,7 +11,7 @@ The entries are as follows:
    Print contents of bag
    P
    
-   Check out your bag - this willprint the bag, display the cost, and empty the bag
+   Check out your bag - this will print the bag, display the cost, and empty the bag
    C
    
    Quit
